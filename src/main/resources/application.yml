@@ -1,0 +1,41 @@
+
+spring:
+  application:
+    name: mediPro
+  datasource:
+    url: jdbc:postgresql://localhost:5432/medipro
+    username: postgres
+    password: Ladi.com1
+  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLInnoDBDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+server:
+#  ssl:
+#    enabled: true
+#    key-store: classpath:auth_service.p12
+#    key-store-password: Ladi.com1
+#    key-store-type: PKCS12
+#    trust-store: classpath:ca.crt
+#    trust-store-password: Ladi.com1
+#    client-auth: need
+  port: 8080
+  error:
+    path: /user/error
+    whitelabel:
+      enabled: false
+logging:
+  level:
+    org.springframework.security: DEBUG

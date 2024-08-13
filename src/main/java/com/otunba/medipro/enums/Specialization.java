@@ -1,0 +1,13 @@
+package com.otunba.medipro.enums;
+
+public enum Specialization {
+    INTERNAL_MEDICINE,
+    PEDIATRICS,
+    FAMILY_MEDICINE,
+    GENERAL_SURGERY,
+    CARDIOTHORACIC_SURGERY,
+    NEUROSURGERY,
+    ORTHOPEDIC_SURGERY,
+    PLASTIC_SURGERY,
+    UROLOGY
+}
