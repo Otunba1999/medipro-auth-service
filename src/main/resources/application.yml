@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/medipro
     username: postgres
-    password: Ladi.com1
+    password: ${PASSWORD}
   jpa:
 #    database-platform: org.hibernate.dialect.PostgreSQLInnoDBDialect
     generate-ddl: true
@@ -26,10 +26,10 @@ server:
 #  ssl:
 #    enabled: true
 #    key-store: classpath:auth_service.p12
-#    key-store-password: Ladi.com1
+#    key-store-password: ${PASSWORD}
 #    key-store-type: PKCS12
 #    trust-store: classpath:ca.crt
-#    trust-store-password: Ladi.com1
+#    trust-store-password: ${PASSWORD}
 #    client-auth: need
   port: 8080
   error:
