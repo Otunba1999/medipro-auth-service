@@ -73,7 +73,7 @@ public class AuthServiceImpl implements AuthService {
         var message = MailMessage.getVerificationMessage(user.getFirstName(), link);
 
         MailRequest mailRequest = new MailRequest(user.getEmail(), "Verification email", message);
-//        emailService.sendVerificationEmail(mailRequest);
+        emailService.sendVerificationEmail(mailRequest);
 
         return Map.of("message", "Account created successfully. Proceed to verify you email address to enable this account.",
                 "userId", savdUser.getId(),
