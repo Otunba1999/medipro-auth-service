@@ -1,5 +1,6 @@
 package com.otunba.medipro.services;
 
+import com.otunba.medipro.dtos.AuthResponse;
 import com.otunba.medipro.exceptions.AuthException;
 import com.otunba.medipro.models.RefreshToken;
 import com.otunba.medipro.models.User;
@@ -27,8 +28,9 @@ public class JwtTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     public String generateToken(Authentication authentication) {
+        var principal = (User)authentication.getPrincipal();
         Instant now = Instant.now();
-        Instant expiresAt = Instant.now().plusSeconds(60);
+        Instant expiresAt = Instant.now().plusSeconds(60 * 60 * 12);
         List<String> scopes = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
@@ -38,12 +40,13 @@ public class JwtTokenService {
                 .expiresAt(expiresAt)
                 .subject(authentication.getName())
                 .claim("authorities", scopes)
+                .claim("userId", principal.getId())
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
     public String generateToken(User user) {
         Instant now = Instant.now();
-        Instant expiresAt = Instant.now().plusSeconds(60 * 60);
+        Instant expiresAt = Instant.now().plusSeconds(60 * 60 * 24);
         List<String> scopes = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
@@ -53,6 +56,7 @@ public class JwtTokenService {
                 .expiresAt(expiresAt)
                 .subject(user.getEmail())
                 .claim("authorities", scopes)
+                .claim("userId", user.getId())
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
@@ -80,6 +84,12 @@ public class JwtTokenService {
         Jwt decodedToken = getDecodedToken(token);
         return decodedToken.getClaimAsString("sub");
     }
+    public AuthResponse decodeJwt(String jwt){
+        Jwt decodedToken = getDecodedToken(jwt);
+        var userId = decodedToken.getClaims().get("userId");
+        var authorities = decodedToken.getClaimAsString("authorities");
+        return new AuthResponse(authorities, userId.toString());
+    }
 
     public boolean isTokenValid(String token) throws IOException {
         Jwt decodedToken = getDecodedToken(token);
@@ -94,3 +104,6 @@ public class JwtTokenService {
     }
 
 }
+
+
+

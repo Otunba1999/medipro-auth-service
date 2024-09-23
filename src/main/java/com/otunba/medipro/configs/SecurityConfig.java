@@ -44,7 +44,7 @@ public class SecurityConfig {
     private final JwtFilterConfig jwtFilterConfig;
 //    private final MyBasicAuthenticationEntryPoint basicAuthenticationEntryPoint;  "auth/register/{token}"
     private static final String[] WHITE_LIST_URL = {
-            "auth/register/**", "auth/login", "auth/logout", "/WEB-INF/jsp/**"
+            "auth/register/**", "auth/login", "auth/logout", "/WEB-INF/jsp/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
     };
 
     @Bean

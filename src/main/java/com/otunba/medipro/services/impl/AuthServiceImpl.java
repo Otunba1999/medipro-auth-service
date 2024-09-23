@@ -1,9 +1,6 @@
 package com.otunba.medipro.services.impl;
 
-import com.otunba.medipro.dtos.LoginDto;
-import com.otunba.medipro.dtos.MailRequest;
-import com.otunba.medipro.dtos.TwoFARequest;
-import com.otunba.medipro.dtos.UserDto;
+import com.otunba.medipro.dtos.*;
 import com.otunba.medipro.enums.Role;
 import com.otunba.medipro.exceptions.AuthException;
 import com.otunba.medipro.models.LoginAttempt;
@@ -191,6 +188,11 @@ public class AuthServiceImpl implements AuthService {
         if(isVerificationValid) throw new AuthException("OTP not valid");
         var token = tokenService.generateToken(user.get());
         return Map.of("Message", "Successfully logged in", "token", token);
+    }
+
+    @Override
+    public AuthResponse verifyJwtToken(String jwtToken) {
+        return tokenService.decodeJwt(jwtToken);
     }
 
     public static String getLink(String token) {

@@ -1,9 +1,6 @@
 package com.otunba.medipro.services;
 
-import com.otunba.medipro.dtos.LoginDto;
-import com.otunba.medipro.dtos.RegistrationDto;
-import com.otunba.medipro.dtos.TwoFARequest;
-import com.otunba.medipro.dtos.UserDto;
+import com.otunba.medipro.dtos.*;
 
 import java.net.UnknownHostException;
 import java.util.Map;
@@ -17,5 +14,6 @@ public interface AuthService {
     Map<String, String> resetPassword(String token, String newPassword);
     Map<String, String> refreshToken(String email, String refreshToken);
     Map<String, String> verifyCode(TwoFARequest request) throws UnknownHostException;
+    AuthResponse verifyJwtToken(String jwtToken);
 
 }
