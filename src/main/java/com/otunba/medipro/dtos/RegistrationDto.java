@@ -1,15 +1,11 @@
 package com.otunba.medipro.dtos;
 
-import com.otunba.medipro.enums.Gender;
-import com.otunba.medipro.enums.Specialization;
 import com.otunba.medipro.validators.NotEmptyOrNull;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor

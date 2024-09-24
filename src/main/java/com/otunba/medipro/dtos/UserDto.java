@@ -20,14 +20,12 @@ public class UserDto {
     @NotEmptyOrNull
     @Email(message = "email must be a valid email")
     private String email;
+    private String firstName;
+    private String lastName;
     @NotEmptyOrNull
     private String password;
     @NotEmptyOrNull
-    private String firstname;
-    @NotEmptyOrNull
-    private String lastname;
-    @NotEmptyOrNull
-    private String phone;
+    private String phoneNumber;
     @NotNull
     private  boolean mFAEnabled = false;
     private Role role;

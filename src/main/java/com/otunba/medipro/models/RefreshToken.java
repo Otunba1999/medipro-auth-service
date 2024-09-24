@@ -1,9 +1,6 @@
 package com.otunba.medipro.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 @Data
+@Table(name = "Refresh_Token")
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder

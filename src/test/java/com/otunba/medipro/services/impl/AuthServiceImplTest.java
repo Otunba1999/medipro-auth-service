@@ -1,10 +1,10 @@
 package com.otunba.medipro.services.impl;
 
-import com.otunba.medipro.dtos.*;
+import com.otunba.medipro.dtos.LoginDto;
+import com.otunba.medipro.dtos.TwoFARequest;
+import com.otunba.medipro.dtos.UserDto;
 import com.otunba.medipro.enums.Role;
 import com.otunba.medipro.exceptions.AuthException;
-import com.otunba.medipro.models.Contact;
-import com.otunba.medipro.models.Profile;
 import com.otunba.medipro.models.User;
 import com.otunba.medipro.models.Verification;
 import com.otunba.medipro.repository.AttemptRepository;
@@ -14,7 +14,6 @@ import com.otunba.medipro.repository.VerificationRepository;
 import com.otunba.medipro.services.IEmailService;
 import com.otunba.medipro.services.JwtTokenService;
 import com.otunba.medipro.services.TwoFAAuthenticationService;
-import com.otunba.medipro.services.UserService;
 import com.otunba.medipro.utility.ModelMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,15 +25,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.otunba.medipro.TestModels.getUserDto1;
 import static com.otunba.medipro.services.impl.AuthServiceImpl.getLink;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -105,6 +101,7 @@ class AuthServiceImplTest {
         doReturn("encodedPassword").when(passwordEncoder).encode(anyString());
         when(tfaService.generateNewSecret()).thenReturn("secret");
         when(userRepository.save(any(User.class))).thenReturn(user);
+        when(getLink(anyString())).thenReturn(anyString());
 
         Verification verification = new Verification();
         verification.setToken("verificationToken");
@@ -128,7 +125,7 @@ class AuthServiceImplTest {
 
         // Act & Assert
         AuthException exception = assertThrows(AuthException.class, () -> authService.registerUser(userDto));
-        assertEquals("Email already exists, please choose another one", exception.getMessage());
+        assertEquals("Email already exists, please try with another email", exception.getMessage());
     }
 
     @Test
@@ -234,6 +231,7 @@ class AuthServiceImplTest {
         // Arrange
         when(userRepository.findByEmail(userDto.getEmail())).thenReturn(Optional.of(user));
         when(verificationRepository.findByUserId(user.getId())).thenReturn(Optional.of(new Verification()));
+        when(verificationRepository.save(any(Verification.class))).thenReturn(new Verification());
 
         // Act
         Map<String, String> response = authService.resendVerificationEmail(userDto.getEmail());

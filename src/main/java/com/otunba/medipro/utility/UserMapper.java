@@ -11,9 +11,10 @@ public class UserMapper implements ModelMapper<UserDto, User>{
     public UserDto mapTo(User user) {
         return UserDto.builder()
                 .role(user.getRole())
-                .lastname(user.getLastName())
-                .firstname(user.getFirstName())
                 .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .lastName(user.getLastName())
+                .firstName(user.getFirstName())
                 .mFAEnabled(user.isMFAEnabled())
                 .id(user.getId())
                 .build();
@@ -22,10 +23,11 @@ public class UserMapper implements ModelMapper<UserDto, User>{
     @Override
     public User mapFrom(UserDto userDto) {
         return User.builder()
-                .firstName(userDto.getFirstname())
-                .lastName(userDto.getLastname())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
+                .phoneNumber(userDto.getPhoneNumber())
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
                 .mFAEnabled(userDto.isMFAEnabled())
                 .build();
     }

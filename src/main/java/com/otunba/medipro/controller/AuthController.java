@@ -38,7 +38,7 @@ public class AuthController {
     }
     @PostMapping("/login")
     @Operation(summary = "Login a user / Authenticate a user")
-    public ResponseEntity<ResponseDto> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<ResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
         var response = authService.loginUser(loginDto);
         var responseDto = ResponseDto.builder()
                 .message(response.get("message"))

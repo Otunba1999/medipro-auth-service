@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,10 +31,9 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean isEnabled;

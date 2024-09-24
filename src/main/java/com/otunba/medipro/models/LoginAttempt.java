@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Table(name = "Login_Attempt")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

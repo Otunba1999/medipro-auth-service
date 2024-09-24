@@ -1,14 +1,8 @@
 package com.otunba.medipro;
 
 import com.otunba.medipro.dtos.*;
-import com.otunba.medipro.enums.Gender;
 import com.otunba.medipro.enums.Role;
-import com.otunba.medipro.enums.Specialization;
-import com.otunba.medipro.models.Contact;
-import com.otunba.medipro.models.Profile;
 import com.otunba.medipro.models.User;
-
-import java.time.LocalDate;
 
 public  class TestModels {
 
